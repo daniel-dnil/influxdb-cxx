@@ -30,12 +30,13 @@ BOOST_AUTO_TEST_CASE(test2)
 {
   auto point = Point{"test"}
     .addField("value", 10LL)
-    .addField("dvalue", 10.10);
+    .addField("dvalue", 10.10)
+    .addField("boolvalue", true);
 
   auto result = getVector(point);
 
   BOOST_CHECK_EQUAL(result[0], "test");
-  BOOST_CHECK_EQUAL(result[1], "value=10i,dvalue=10.1");
+  BOOST_CHECK_EQUAL(result[1], "value=10i,dvalue=10.1,boolvalue=true");
 }
 
 BOOST_AUTO_TEST_CASE(test3)
@@ -43,12 +44,14 @@ BOOST_AUTO_TEST_CASE(test3)
   auto point = Point{"test"}
     .addField("value", 10LL)
     .addField("dvalue", 10.10)
+    .addField("boolvalue", false)
+    .addField("strvalue", std::string("mystring"))
     .addTag("tag", "tagval");
 
   auto result = getVector(point);
 
   BOOST_CHECK_EQUAL(result[0], "test,tag=tagval");
-  BOOST_CHECK_EQUAL(result[1], "value=10i,dvalue=10.1");
+  BOOST_CHECK_EQUAL(result[1], "value=10i,dvalue=10.1,boolvalue=false,strvalue=\"mystring\"");
 }
 
 BOOST_AUTO_TEST_CASE(test4)
